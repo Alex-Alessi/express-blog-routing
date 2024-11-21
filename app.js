@@ -1,8 +1,15 @@
 const express = require("express");
 const app = express();
-const port = 3000;
+require("dotenv").config();
+
+const port = process.env.PORT;
+const host = process.env.HOST;
 
 app.use(express.static("public"));
+
+app.listen(port, () => {
+  console.log(`App listening on ${host}:${port}`);
+});
 
 app.get("/", (req, res) => {
   res.send("Server del mio blog");
@@ -47,8 +54,4 @@ app.get("/bacheca", (req, res) => {
     post: posts,
   };
   res.json(bacheca);
-});
-
-app.listen(port, () => {
-  console.log("Server online sulla porta " + port);
 });
